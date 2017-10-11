@@ -62,8 +62,12 @@ const propTypes = {
   confirmText: PropTypes.string,
   cancelText: PropTypes.string,
   itemStyle: PropTypes.object,
+  containerStyle: PropTypes.object,
   onSubmit: PropTypes.func,
   disableOverlay: PropTypes.bool,
+  cancelButtonStyle: PropTypes.object,
+  confirmButtonStyle: PropTypes.object,
+  buttonBarStyle: PropTypes.object,
 };
 
 class SimplePicker extends Component {
@@ -143,12 +147,12 @@ class SimplePicker extends Component {
   }
 
   renderItem(option, index) {
-    const label = (this.props.labels) ? this.props.labels[index] : option;
+    const label = (this.props.labels) ? this.props.labels[index] : option.value;
 
     return (
       <PickerItemIOS
-        key={option}
-        value={option}
+        key={option.key}
+        value={option.value}
         label={label}
       />
     );
@@ -163,6 +167,10 @@ class SimplePicker extends Component {
 			cancelText,
 			confirmText,
 			disableOverlay,
+      containerStyle,
+      cancelButtonStyle,
+      confirmButtonStyle,
+      buttonBarStyle
 		} = this.props;
 
     return (
@@ -179,16 +187,16 @@ class SimplePicker extends Component {
 							</TouchableWithoutFeedback>
 						</View>
 					}
-          <View style={styles.modalContainer}>
-            <View style={styles.buttonView}>
+          <View style={[styles.modalContainer, containerStyle]}>
+            <View style={[styles.buttonView, buttonBarStyle]}>
               <TouchableOpacity onPress={this.onPressCancel}>
-                <Text style={buttonStyle}>
+                <Text style={[buttonStyle, cancelButtonStyle]}>
                   {cancelText || 'Cancel'}
                 </Text>
               </TouchableOpacity>
 
               <TouchableOpacity onPress={this.onPressSubmit}>
-                <Text style={buttonStyle}>
+                <Text style={[buttonStyle, confirmButtonStyle]}>
                   {confirmText || 'Confirm'}
                 </Text>
               </TouchableOpacity>
