@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   buttonView: {
     width: SCREEN_WIDTH,
     padding: 8,
-    borderTopWidth: 0.5,
+    borderTopWidth: 1,
     borderTopColor: 'lightgrey',
     justifyContent: 'space-between',
     flexDirection: 'row',
@@ -170,7 +170,9 @@ class SimplePicker extends Component {
       containerStyle,
       cancelButtonStyle,
       confirmButtonStyle,
-      buttonBarStyle
+      buttonBarStyle,
+      title,
+      titleStyle
 		} = this.props;
 
     return (
@@ -194,6 +196,8 @@ class SimplePicker extends Component {
                   {cancelText || 'Cancel'}
                 </Text>
               </TouchableOpacity>
+
+              <Text style={[titleStyle]}>{title}</Text>
 
               <TouchableOpacity onPress={this.onPressSubmit}>
                 <Text style={[buttonStyle, confirmButtonStyle]}>
