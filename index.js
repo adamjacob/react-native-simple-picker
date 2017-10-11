@@ -64,6 +64,7 @@ const propTypes = {
   itemStyle: PropTypes.object,
   containerStyle: PropTypes.object,
   onSubmit: PropTypes.func,
+  onCancel: PropTypes.func,
   disableOverlay: PropTypes.bool,
   cancelButtonStyle: PropTypes.object,
   confirmButtonStyle: PropTypes.object,
@@ -113,6 +114,9 @@ class SimplePicker extends Component {
   }
 
   onPressCancel() {
+    if (this.props.onCancel) {
+      this.props.onCancel();
+    }
     this.hide();
   }
 
